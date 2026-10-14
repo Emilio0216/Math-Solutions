@@ -41,12 +41,12 @@ def X_And_Y_Velocity_From_Displacement_And_Time(X_Displacement, Total_Time):
     Y_Intial_Velocity = (Total_Time / 2) * 9.8
     return X_Intial_Velocity, Y_Intial_Velocity, Intial_Velocity_And_Angle(X_Intial_Velocity, Y_Intial_Velocity)
 def X_And_Y_Velocity_From_Intial_Velocity_And_Angle(Intial_Velocity, Angle_Degrees):
-    Angle = math.asin(Angle_Degrees)
+    Angle = math.cos(math.radians(Angle_Degrees))
     print(Angle)
 
 #intial varible list
-Text_Time = .02
-
+Text_Time = .001
+Decimal_Places = 5
 
 #Main script
 Repeat = True
@@ -54,7 +54,11 @@ while(Repeat == True):
     Text_Scroll_Effect("0. Settings\n1. Quadratic solution \n2. For intial velocity and angle\n3. Finding x and y intial velocity off distance and time\n4. Finding x and y intial velocity off intial velocity and angle", Text_Time)
     Equation = Question(int, "What are you solving?: ", "Please choose a whole number 0-5", Text_Time)
     if Equation == 0:
-        Text_Time = Question(float, "How fast do you want the text scroll speed: " , "Number from .04 to 0" ,Text_Time)
+        Options = Question(int,"1. Text Speed\n 2. Decimal place rounding\n what would you like?: ", "a number please", Text_Time)
+        if Options == 1:
+            Text_Time = Question(float, "How fast do you want the text scroll speed: " , "Number from .04 to 0" ,Text_Time)
+        elif Options == 2:
+            Decimal_Places = Question(int, "How many decimal places do you want?: " , "Number not text dawg" ,Text_Time)
     elif Equation == 1:
         Text_Scroll_Effect("* in the answer first number will be the positive result and the second number will be the negative result.", Text_Time)
         a = Question(float, "First Number: ", "Answer invalid", Text_Time)
@@ -77,7 +81,7 @@ while(Repeat == True):
 
     #unfinished
     elif Equation == 4:
-        X_And_Y_Velocity_From_Intial_Velocity_And_Angle(2,30)
+        X_And_Y_Velocity_From_Intial_Velocity_And_Angle(2,60)
     Again = Question(str, "(yes or no) done using the script?: ", "I don't think this is possible to mess up", Text_Time)
     if Again == "yes":
         Repeat == False

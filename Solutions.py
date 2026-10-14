@@ -57,24 +57,26 @@ while(Repeat == True):
         Text_Time = Question(float, "How fast do you want the text scroll speed: " , "Number from .04 to 0" ,Text_Time)
     elif Equation == 1:
         Text_Scroll_Effect("* in the answer first number will be the positive result and the second number will be the negative result.", Text_Time)
-        a = float(input('1st number: '))
-        b = float(input('2nd number: '))
-        c = float(input('3rd number: '))
-        print("Qaudratic solution for those 3 numbers is " + str(Quadratic_Solution(a,b,c)))
+        a = Question(float, "First Number: ", "Answer invalid", Text_Time)
+        b = Question(float, "Second Number: ", "Answer invalid", Text_Time)
+        c = Question(float, "Third Number: ", "Answer invalid", Text_Time)
+        Answer_Text = "Qaudratic solution for those 3 numbers is " + str(Quadratic_Solution(a,b,c))
+        Text_Scroll_Effect(Answer_Text, Text_Time)
 
     elif Equation == 2:
-        Intial_X_Velocity = float(input('X intial velocity: '))
-        Intial_Y_Velocity = float(input('Y intial velocity: '))
-        print("\n Intial velocity and angle is " + str(velo_angle(Intial_X_Velocity, Intial_Y_Velocity)) + " your job to round")
+        Intial_X_Velocity = Question(float,'X intial velocity?: ', 'Please Input a number', Text_Time)
+        Intial_Y_Velocity = Question(float,'Y intial velocity?: ', 'Please Input a number', Text_Time)
+        Answer_Text = "Intial velocity and angle is " + str(velo_angle(Intial_X_Velocity, Intial_Y_Velocity))  + " your job to round"
+        Text_Scroll_Effect(Answer_Text)
 
     elif Equation == 3:
-        X_Displacement = float(input('Distance: '))
+        X_Displacement = Question(float, 'Distance?: ', "You suck", Text_Time)
         Time = float(input('Total Time in air: '))
         print("X and Y Intial velocity = " + str(X_And_Y_Velocity_From_Displacement_And_Time(X_Displacement, Time)))
 
     elif Equation == 4:
         X_And_Y_Velocity_From_Intial_Velocity_And_Angle(2,30)
-    Again = Question(str, "\n(yes or no) done using the script?: ", "I don't think this is possible to mess up", Text_Time)
+    Again = Question(str, "(yes or no) done using the script?: ", "I don't think this is possible to mess up", Text_Time)
     if Again == "yes":
         Repeat == False
     print('')

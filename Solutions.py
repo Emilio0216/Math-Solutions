@@ -1,4 +1,4 @@
-# math.asin(math.radians(b/Intial_Velocity))
+# √ for later
 import math, time
 from time import sleep
 def Question(Answer_Type):
@@ -6,15 +6,11 @@ def Question(Answer_Type):
         Answer = input()
         #probably a better way to do this but im lazy
         try:
-            if Answer_Type == float:
-                Correct = float(Text_Time)
-            elif Answer_Type == str:
-                Correct = str(Text_Time)
-            elif Answer_Type == int:
-                Correct = int(Text_Time)
+            Correct = Answer_Type(Answer)
             break
         except ValueError:
             Text_Scroll_Effect("That is not a valid answer. Please try again.", .01, False)
+    return Correct
 def Text_Scroll_Effect(Text, Time, Question):
     for char in Text:
         print( char, end='')
@@ -45,7 +41,6 @@ def X_And_Y_Velocity_From_Intial_Velocity_And_Angle(Intial_Velocity, Angle_Degre
 Text_Time = .02
 Repeat = False
 while(Repeat == False):
-
     Text_Scroll_Effect("0. Settings\n1. Quadratic solution \n2. For intial velocity and angle\n3. Finding x and y intial velocity off distance and time\n4. Finding x and y intial velocity off intial velocity and angle", Text_Time, False)
     Text_Scroll_Effect("What are you solving?: ", Text_Time, True)
     Equation = int(input(''))

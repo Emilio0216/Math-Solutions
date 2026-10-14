@@ -71,9 +71,11 @@ while(Repeat == True):
 
     elif Equation == 3:
         X_Displacement = Question(float, 'Distance?: ', "You suck", Text_Time)
-        Time = float(input('Total Time in air: '))
-        print("X and Y Intial velocity = " + str(X_And_Y_Velocity_From_Displacement_And_Time(X_Displacement, Time)))
+        Time = Question(float,'Total Time in air?: ', "Invalid input, please put a number", Text_Time)
+        Answer_Text ="X and Y Intial velocity = " + str(X_And_Y_Velocity_From_Displacement_And_Time(X_Displacement, Time))
+        Text_Scroll_Effect(Answer_Text , Text_Time)
 
+    #unfinished
     elif Equation == 4:
         X_And_Y_Velocity_From_Intial_Velocity_And_Angle(2,30)
     Again = Question(str, "(yes or no) done using the script?: ", "I don't think this is possible to mess up", Text_Time)

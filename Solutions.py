@@ -1,6 +1,6 @@
 # √ for later
 #imports
-import math, time
+import math, time, os
 from time import sleep
 
 #Helper functions
@@ -41,8 +41,9 @@ def X_And_Y_Velocity_From_Displacement_And_Time(X_Displacement, Total_Time):
     Y_Intial_Velocity = (Total_Time / 2) * 9.8
     return X_Intial_Velocity, Y_Intial_Velocity, Intial_Velocity_And_Angle(X_Intial_Velocity, Y_Intial_Velocity)
 def X_And_Y_Velocity_From_Intial_Velocity_And_Angle(Intial_Velocity, Angle_Degrees):
-    Angle = math.cos(math.radians(Angle_Degrees))
-    print(Angle)
+    Intial_X_Velocity = math.cos(math.radians(Angle_Degrees))* Intial_Velocity
+    Intial_Y_Velocity = math.sin(math.radians(Angle_Degrees))* Intial_Velocity
+    return Intial_X_Velocity, Intial_Y_Velocity
 
 #intial varible list
 Text_Time = .001
@@ -54,7 +55,7 @@ while(Repeat == True):
     Text_Scroll_Effect("0. Settings\n1. Quadratic solution \n2. For intial velocity and angle\n3. Finding x and y intial velocity off distance and time\n4. Finding x and y intial velocity off intial velocity and angle", Text_Time)
     Equation = Question(int, "What are you solving?: ", "Please choose a whole number 0-5", Text_Time)
     if Equation == 0:
-        Options = Question(int,"1. Text Speed\n 2. Decimal place rounding\n what would you like?: ", "a number please", Text_Time)
+        Options = Question(int,"1. Text Speed\n2. Decimal place rounding\n what would you like?: ", "a number please", Text_Time)
         if Options == 1:
             Text_Time = Question(float, "How fast do you want the text scroll speed: " , "Number from .04 to 0" ,Text_Time)
         elif Options == 2:
@@ -81,7 +82,10 @@ while(Repeat == True):
 
     #unfinished
     elif Equation == 4:
-        X_And_Y_Velocity_From_Intial_Velocity_And_Angle(2,60)
+        Intial_Velocity = Question(float, "Initial velocity?: ", "Invalid", Text_Time)
+        Angle_Degrees = Question(float, "Angle degrees?: ", "Number not str", Text_Time)
+        Answer_Text= X_And_Y_Velocity_From_Intial_Velocity_And_Angle(Intial_Velocity,Angle_Degrees)
+        Text_Scroll_Effect(Answer_Text, Text_Time)
     Again = Question(str, "(yes or no) done using the script?: ", "I don't think this is possible to mess up", Text_Time)
     if Again == "yes":
         Repeat == False

@@ -1,13 +1,28 @@
+# math.asin(math.radians(b/Intial_Velocity))
 import math, time
 from time import sleep
-
-def Text_Scroll_Effect(Text, Time):
+def Question(Answer_Type):
+    while True:
+        Answer = input()
+        #probably a better way to do this but im lazy
+        try:
+            if Answer_Type == float:
+                Correct = float(Text_Time)
+            elif Answer_Type == str:
+                Correct = str(Text_Time)
+            elif Answer_Type == int:
+                Correct = int(Text_Time)
+            break
+        except ValueError:
+            Text_Scroll_Effect("That is not a valid answer. Please try again.", .01, False)
+def Text_Scroll_Effect(Text, Time, Question):
     for char in Text:
         print( char, end='')
         sleep(Time)
-    print('')
+    if Question == False:
+        print('')
 def Intial_Velocity_And_Angle(Intial_X_Velocity, Intial_Y_Velocity):
-    # I hate radians with a passion
+    # i hate radians with a passion
     Intial_Velocity = ((Intial_X_Velocity ** 2) + (Intial_Y_Velocity ** 2)) ** .5
     Angle = Intial_Y_Velocity / Intial_Velocity
     Angle_Degrees = math.asin(Angle) * (180.0 / math.pi)
@@ -27,16 +42,17 @@ def X_And_Y_Velocity_From_Intial_Velocity_And_Angle(Intial_Velocity, Angle_Degre
     Angle = math.asin(Angle_Degrees)
     print(Angle)
 
-Text_Time = float(input('How fast do you want the text scroll speed (recommended .04 but 0 is instant): '))
-Repeat = True
-while(Repeat == True):
+Text_Time = .02
+Repeat = False
+while(Repeat == False):
 
-    Text_Scroll_Effect("1. Quadratic solution \n2. For intial velocity and angle\n3. Finding x and y intial velocity off distance and time\n4. Finding x and y intial velocity off intial velocity and angle", Text_Time)
-    Text_effect("What are you solving?: ", Text_Time)
+    Text_Scroll_Effect("0. Settings\n1. Quadratic solution \n2. For intial velocity and angle\n3. Finding x and y intial velocity off distance and time\n4. Finding x and y intial velocity off intial velocity and angle", Text_Time, False)
+    Text_Scroll_Effect("What are you solving?: ", Text_Time, True)
     Equation = int(input(''))
     print("")
     if Equation == 0:
-        print('there is no 0 dawg')
+        Text_Scroll_Effect("How fast do you want the text scroll speed: ", Text_Time, True)
+        Text_Time = Question(float)
     
     elif Equation == 1:
         print("* in the answer first number will be the positive result and the second number will be the negative result.")
@@ -53,11 +69,12 @@ while(Repeat == True):
     elif Equation == 3:
         X_Displacement = float(input('Distance: '))
         Time = float(input('Total Time in air: '))
-        print("X and Y Intial velocity = " + str(X_Y_velo(X_Displacement, Time)))
+        print("X and Y Intial velocity = " + str(X_And_Y_Velocity_From_Displacement_And_Time(X_Displacement, Time)))
 
     elif Equation == 4:
-        print("not here yet")
+        X_And_Y_Velocity_From_Intial_Velocity_And_Angle
 
-    Again = input("\n done?: ")
+    Again = input("\n(yes or no) done using the script?: ")
     if Again == "yes":
-        sys.exit()
+        sys.Program_Crash_On_Purpose
+    print('')

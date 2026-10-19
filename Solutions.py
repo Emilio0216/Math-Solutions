@@ -23,31 +23,36 @@ def Text_Scroll_Effect(Text, Time, Question = False):
     if Question == False:
         print('')
 #Math functions
-def Intial_Velocity_And_Angle(Intial_X_Velocity, Intial_Y_Velocity):
+def Intial_Velocity_And_Angle(Intial_X_Velocity, Intial_Y_Velocity, Decimals):
     # i hate radians with a passion
     Intial_Velocity = ((Intial_X_Velocity ** 2) + (Intial_Y_Velocity ** 2)) ** .5
     Angle = Intial_Y_Velocity / Intial_Velocity
     Angle_Degrees = math.asin(Angle) * (180.0 / math.pi)
-    return Intial_Velocity, Angle_Degrees
-def Quadratic_Solution(a, b, c):
+    return round(Intial_Velocity, Decimals), round(Angle_Degrees, Decimals)
+
+def Quadratic_Solution(a, b, c, Decimals):
     Divider = 2 * a
     Before_Root = (b**2) + (-4*(a*c))
     Square_Root = Before_Root**.5
     Total_Positive = ((b * -1) + Square_Root) / Divider
     Total_Negative = ((b * -1) - Square_Root) / Divider
-    return (Total_Positive, Total_Negative)
-def X_And_Y_Velocity_From_Displacement_And_Time(X_Displacement, Total_Time):
+    return round(Total_Positive,Decimals), round(Total_Negative,Decimals)
+
+def X_And_Y_Velocity_From_Displacement_And_Time(X_Displacement, Total_Time, Decimals):
     X_Intial_Velocity = X_Displacement / Total_Time
     Y_Intial_Velocity = (Total_Time / 2) * 9.8
-    return X_Intial_Velocity, Y_Intial_Velocity, Intial_Velocity_And_Angle(X_Intial_Velocity, Y_Intial_Velocity)
-def X_And_Y_Velocity_From_Intial_Velocity_And_Angle(Intial_Velocity, Angle_Degrees):
+    return round(X_Intial_Velocity, Decimals), round(Y_Intial_Velocity, Decimals), Intial_Velocity_And_Angle(X_Intial_Velocity, Y_Intial_Velocity, Decimals)
+
+def X_And_Y_Velocity_From_Intial_Velocity_And_Angle(Intial_Velocity, Angle_Degrees, Decimals):
     Intial_X_Velocity = math.cos(math.radians(Angle_Degrees))* Intial_Velocity
     Intial_Y_Velocity = math.sin(math.radians(Angle_Degrees))* Intial_Velocity
-    return Intial_X_Velocity, Intial_Y_Velocity
+    return round(Intial_X_Velocity, Decimals), round(Intial_Y_Velocity, Decimals)
 
 #intial varible list
 Text_Time = .001
 Decimal_Places = 5
+Default_Variable_Text = "Default text speed: " + str(Text_Time) + " \nDefault Rounding: " + str(Decimal_Places) + " decimal places \n"
+Text_Scroll_Effect(Default_Variable_Text, Text_Time)
 
 #Main script
 Repeat = True
@@ -65,28 +70,29 @@ while(Repeat == True):
         a = Question(float, "First Number: ", "Answer invalid", Text_Time)
         b = Question(float, "Second Number: ", "Answer invalid", Text_Time)
         c = Question(float, "Third Number: ", "Answer invalid", Text_Time)
-        Answer_Text = "Qaudratic solution for those 3 numbers is " + str(Quadratic_Solution(a,b,c))
+        Answer_Text = "Qaudratic solution for those 3 numbers is " + str(Quadratic_Solution(a,b,c,Decimal_Places))
         Text_Scroll_Effect(Answer_Text, Text_Time)
 
     elif Equation == 2:
         Intial_X_Velocity = Question(float,'X intial velocity?: ', 'Please Input a number', Text_Time)
         Intial_Y_Velocity = Question(float,'Y intial velocity?: ', 'Please Input a number', Text_Time)
-        Answer_Text = "Intial velocity and angle is " + str(velo_angle(Intial_X_Velocity, Intial_Y_Velocity))  + " your job to round"
-        Text_Scroll_Effect(Answer_Text)
+        Answer_Text = "Intial velocity and angle is " + str(Intial_Velocity_And_Angle(Intial_X_Velocity, Intial_Y_Velocity, Decimal_Places))
+        Text_Scroll_Effect(Answer_Text, Text_Time)
 
     elif Equation == 3:
         X_Displacement = Question(float, 'Distance?: ', "You suck", Text_Time)
         Time = Question(float,'Total Time in air?: ', "Invalid input, please put a number", Text_Time)
-        Answer_Text ="X and Y Intial velocity = " + str(X_And_Y_Velocity_From_Displacement_And_Time(X_Displacement, Time))
+        Answer_Text ="X and Y Intial velocity = " + str(X_And_Y_Velocity_From_Displacement_And_Time(X_Displacement, Time, Decimal_Places))
         Text_Scroll_Effect(Answer_Text , Text_Time)
 
     #unfinished
     elif Equation == 4:
         Intial_Velocity = Question(float, "Initial velocity?: ", "Invalid", Text_Time)
         Angle_Degrees = Question(float, "Angle degrees?: ", "Number not str", Text_Time)
-        Answer_Text= X_And_Y_Velocity_From_Intial_Velocity_And_Angle(Intial_Velocity,Angle_Degrees)
+        Answer_Text= "X and Y intial velocitys" + str(X_And_Y_Velocity_From_Intial_Velocity_And_Angle(Intial_Velocity, Angle_Degrees, Decimal_Places),)
         Text_Scroll_Effect(Answer_Text, Text_Time)
     Again = Question(str, "(yes or no) done using the script?: ", "I don't think this is possible to mess up", Text_Time)
     if Again == "yes":
-        Repeat == False
+        Repeat = False
+
     print('')

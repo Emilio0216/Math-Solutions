@@ -51,6 +51,10 @@ def X_And_Y_Velocity_From_Intial_Velocity_And_Angle(Intial_Velocity, Angle_Degre
     Intial_Y_Velocity = math.sin(math.radians(Angle_Degrees))* Intial_Velocity
     return round(Intial_X_Velocity, Decimals), round(Intial_Y_Velocity, Decimals)
 
+def X_From_Square_Area_And_Perimeter(Area, Perimeter, Decimals):
+    Temp_Perimeter = Perimeter/-2
+    X = Quadratic_Solution(1,Temp_Perimeter,Area,Decimals)
+    return X
 #intial varible list
 Text_Time = .005
 Decimal_Places = 5
@@ -60,7 +64,7 @@ Text_Scroll_Effect(Default_Variable_Text, Text_Time)
 #Main script
 Repeat = True
 while(Repeat == True):
-    Text_Scroll_Effect("0. Settings\n1. Quadratic solution \n2. For intial velocity and angle\n3. Finding x and y intial velocity off distance and time\n4. Finding x and y intial velocity off intial velocity and angle", Text_Time)
+    Text_Scroll_Effect("0. Settings\n1. Quadratic solution \n2. For intial velocity and angle\n3. Finding x and y intial velocity off distance and time\n4. Finding x and y intial velocity off intial velocity and angle\n5. Finding Length and width of a square with Area and Perimeter", Text_Time)
     Equation = Question(int, "What would you like to do?: ", "Please choose a whole number 0-5", Text_Time)
     if Equation == 0:
         Options = Question(int,"1. Text Speed\n2. Decimal place rounding\n what would you like?: ", "a number please", Text_Time)
@@ -93,6 +97,12 @@ while(Repeat == True):
         Intial_Velocity = Question(float, "Initial velocity?: ", "Invalid", Text_Time)
         Angle_Degrees = Question(float, "Angle degrees?: ", "Number not str", Text_Time)
         Answer_Text= "X and Y intial velocitys" + str(X_And_Y_Velocity_From_Intial_Velocity_And_Angle(Intial_Velocity, Angle_Degrees, Decimal_Places),)
+        Text_Scroll_Effect(Answer_Text, Text_Time)
+    
+    elif Equation == 5:
+        Area_Of_Square = Question(float, "area?: ", "Invalid", Text_Time)
+        Perimeter_Of_Square = Question(float, "perimeter?: ", "Number not str", Text_Time)
+        Answer_Text= "Length and width" + str(X_From_Square_Area_And_Perimeter(Area_Of_Square,Perimeter_Of_Square,Decimal_Places))
         Text_Scroll_Effect(Answer_Text, Text_Time)
     
     Again = Question(str, "(yes or no) done using the script?: ", "I don't think this is possible to mess up", Text_Time)

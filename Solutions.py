@@ -2,9 +2,14 @@
 # im planning on adding simplified square roots but that might be too hard idk yet
 
 #Imports
-import math, time
+import math, time, random, sys, os
 from time import sleep
-
+"""
+for t in text:
+        print(t, end='')
+        sys.stdout.flush()
+        time.sleep(delay)
+"""
 #Helper functions
 def Question(Answer_Type, Question_Text = "I NEED TO RESET THIS TEXT", Fail_Text = "That is not a valid answer. Please try again.", Text_Time = 0.02):
     Text_Scroll_Effect(Question_Text, Text_Time, True)
@@ -20,10 +25,13 @@ def Question(Answer_Type, Question_Text = "I NEED TO RESET THIS TEXT", Fail_Text
     return Correct
 def Text_Scroll_Effect(Text, Time, Question = False):
     for char in Text:
-        print( char, end='')
+        print(char, end='')
+        sys.stdout.flush()
         sleep(Time)
     if Question == False:
         print('')
+def Clear_Terminal():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 #Math functions
 def Intial_Velocity_And_Angle(Intial_X_Velocity, Intial_Y_Velocity, Decimals):
@@ -68,6 +76,7 @@ def X_And_Dimensions_From_Area_And_Length_And_Width(Area, Length1, Length2, Widt
     return Answers, Length_Answer, Width_Answer
 
 #intial varible list
+Clear_Terminal()
 Text_Time = .005
 Decimal_Places = 5
 Default_Variable_Text = "Default text speed: " + str(Text_Time) + " \nDefault Rounding: " + str(Decimal_Places) + " decimal places \n"
@@ -128,7 +137,8 @@ while(Repeat == True):
         Answer_Text = "X and Length & width" + str(X_And_Dimensions_From_Area_And_Length_And_Width(Area_Of_Square, Length1, Length2, Width1, Width2, Decimal_Places))
         Text_Scroll_Effect(Answer_Text, Text_Time)
     Again = Question(str, "(yes or no) done using the script?: ", "I don't think this is possible to mess up", Text_Time)
-    if Again == "yes" or "Yes":
+    if Again == "yes":
         Repeat = False
 
-    print('')
+    Clear_Terminal()
+print('something broke or you ended the script')

@@ -1,6 +1,6 @@
 # symbol for √ for later 
 # im planning on adding simplified square roots but that might be too hard idk yet
-#auraaaa
+
 #Imports
 import math, time
 from time import sleep
@@ -55,16 +55,29 @@ def X_From_Square_Area_And_Perimeter(Area, Perimeter, Decimals):
     Temp_Perimeter = Perimeter/-2
     X = Quadratic_Solution(1,Temp_Perimeter,Area,Decimals)
     return X
+
+def X_And_Dimensions_From_Area_And_Length_And_Width(Area, Length1, Length2, Width1, Width2, Decimals):
+    #i had to relearn arrays for this and im mad 
+    Temp_Area = Area * -1
+    a = Length1 * Width1
+    b = (Length1 * Width2) + (Width1 * Length2)
+    c = (Length2 * Width2) + Temp_Area
+    Answers = Quadratic_Solution(a,b,c,Decimals)
+    Length_Answer = (Answers[0]*Length1) + Length2
+    Width_Answer = (Answers[0] * Width1) + Width2
+    return Answers, Length_Answer, Width_Answer
+
 #intial varible list
 Text_Time = .005
 Decimal_Places = 5
 Default_Variable_Text = "Default text speed: " + str(Text_Time) + " \nDefault Rounding: " + str(Decimal_Places) + " decimal places \n"
 Text_Scroll_Effect(Default_Variable_Text, Text_Time)
 
+
 #Main script
 Repeat = True
 while(Repeat == True):
-    Text_Scroll_Effect("0. Settings\n1. Quadratic solution \n2. For intial velocity and angle\n3. Finding x and y intial velocity off distance and time\n4. Finding x and y intial velocity off intial velocity and angle\n5. Finding Length and width of a square with Area and Perimeter", Text_Time)
+    Text_Scroll_Effect("0. Settings\n1. Quadratic solution \n2. For intial velocity and angle\n3. Finding x and y intial velocity off distance and time\n4. Finding x and y intial velocity off intial velocity and angle\n5. Finding Length and width of a square with Area and Perimeter\n6. X and dimensions for a square from area and length & Width", Text_Time)
     Equation = Question(int, "What would you like to do?: ", "Please choose a whole number 0-5", Text_Time)
     if Equation == 0:
         Options = Question(int,"1. Text Speed\n2. Decimal place rounding\n what would you like?: ", "a number please", Text_Time)
@@ -105,8 +118,17 @@ while(Repeat == True):
         Answer_Text= "Length and width" + str(X_From_Square_Area_And_Perimeter(Area_Of_Square,Perimeter_Of_Square,Decimal_Places))
         Text_Scroll_Effect(Answer_Text, Text_Time)
     
+    elif Equation == 6:
+        Text_Scroll_Effect("when answering _x + _ the blanks are the numbers you input",Text_Time)
+        Area_Of_Square = Question(float, "area?: ", "Invalid", Text_Time)
+        Length1 = Question(float, "First number for Length?: ", "Number not str", Text_Time)
+        Length2 = Question(float, "Second number for Length?: ", "Number not str", Text_Time)
+        Width1 = Question(float, "First number for Width?: ", "Number not str", Text_Time)
+        Width2 = Question(float, "Second number for Width?: ", "Number not str", Text_Time)
+        Answer_Text = "X and Length & width" + str(X_And_Dimensions_From_Area_And_Length_And_Width(Area_Of_Square, Length1, Length2, Width1, Width2, Decimal_Places))
+        Text_Scroll_Effect(Answer_Text, Text_Time)
     Again = Question(str, "(yes or no) done using the script?: ", "I don't think this is possible to mess up", Text_Time)
-    if Again == "yes":
+    if Again == "yes" or "Yes":
         Repeat = False
 
     print('')

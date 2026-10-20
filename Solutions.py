@@ -1,6 +1,6 @@
 # symbol for √ for later 
 # im planning on adding simplified square roots but that might be too hard idk yet
-
+#auraaaa
 #Imports
 import math, time
 from time import sleep

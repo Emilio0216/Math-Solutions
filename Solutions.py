@@ -2,7 +2,7 @@
 # im planning on adding simplified square roots but that might be too hard idk yet
 
 #Imports
-import math, time, random, sys, os
+import math, time, random, sys, os, Setting
 from time import sleep
 """
 for t in text:
@@ -75,23 +75,47 @@ def X_And_Dimensions_From_Area_And_Length_And_Width(Area, Length1, Length2, Widt
     Width_Answer = (Answers[0] * Width1) + Width2
     return Answers, Length_Answer, Width_Answer
 
+def Dimensions_Of_A_Triangle_From_Lengths():
+    print('unfinished')
+
+def X_And_Dimensions_From_Triangle_Area_And_Length_And_Height(Area, Length1, Length2, Height1, Height2, Decimals):
+    Temp_Area_Tri = Area * 2
+    return X_And_Dimensions_From_Area_And_Length_And_Width(Temp_Area_Tri ,Length1, Length2, Height1, Height2, Decimals)
 #intial varible list
 Clear_Terminal()
-Text_Time = .005
-Decimal_Places = 5
+Text_Time = Setting.Text_Speed()
+Decimal_Places = Setting.Decimal_Amount()
 Default_Variable_Text = "Default text speed: " + str(Text_Time) + " \nDefault Rounding: " + str(Decimal_Places) + " decimal places \n"
 Text_Scroll_Effect(Default_Variable_Text, Text_Time)
+
+
+
+
+
+
+
+
+
 
 
 #Main script
 Repeat = True
 while(Repeat == True):
-    Text_Scroll_Effect("0. Settings\n1. Quadratic solution \n2. For intial velocity and angle\n3. Finding x and y intial velocity off distance and time\n4. Finding x and y intial velocity off intial velocity and angle\n5. Finding Length and width of a square with Area and Perimeter\n6. X and dimensions for a square from area and length & Width", Text_Time)
-    Equation = Question(int, "What would you like to do?: ", "Please choose a whole number 0-5", Text_Time)
+    Text_Scroll_Effect("0. Settings\n1. Quadratic solution \n2. For intial velocity and angle\n3. Finding x and y intial velocity off distance and time\n4. Finding x and y intial velocity off intial velocity and angle\n5. Finding Length and width of a square with Area and Perimeter\n6. X and dimensions for a square from area and length & Width\n7. X and dimensions from area length and height", Text_Time)
+    Equation = Question(int, "What would you like to do?: ", "Please choose a whole number 0-7", Text_Time)
     if Equation == 0:
         Options = Question(int,"1. Text Speed\n2. Decimal place rounding\n what would you like?: ", "a number please", Text_Time)
         if Options == 1:
             Text_Time = Question(float, "How fast do you want the text scroll speed: " , "Number from .04 to 0" ,Text_Time)
+            with open('Setting.py', 'r') as f:
+                lines = f.read().split('\n')
+                print(lines)
+                new_line = '    a = ' + str(Text_Time)
+                new_file = '\n'.join(lines[:1] + [new_line] + lines[2:])
+
+            with open('Setting.py', 'w') as f:
+                f.write(new_file)
+
         elif Options == 2:
             Decimal_Places = Question(int, "How many decimal places do you want?: " , "Number not text dawg" ,Text_Time)
     elif Equation == 1:
@@ -135,6 +159,16 @@ while(Repeat == True):
         Width1 = Question(float, "First number for Width?: ", "Number not str", Text_Time)
         Width2 = Question(float, "Second number for Width?: ", "Number not str", Text_Time)
         Answer_Text = "X and Length & width" + str(X_And_Dimensions_From_Area_And_Length_And_Width(Area_Of_Square, Length1, Length2, Width1, Width2, Decimal_Places))
+        Text_Scroll_Effect(Answer_Text, Text_Time)
+
+    elif Equation == 7:
+        Text_Scroll_Effect("when answering _x + _ the blanks are the numbers you input",Text_Time)
+        Area_Of_Square = Question(float, "area?: ", "Invalid", Text_Time)
+        Length1 = Question(float, "First number for Length?: ", "Number not str", Text_Time)
+        Length2 = Question(float, "Second number for Length?: ", "Number not str", Text_Time)
+        Height1 = Question(float, "First number for Height?: ", "Number not str", Text_Time)
+        Height2 = Question(float, "Second number for Height?: ", "Number not str", Text_Time)
+        Answer_Text = "X and Length & Height " + str(X_And_Dimensions_From_Triangle_Area_And_Length_And_Height(Area_Of_Square, Length1, Length2, Height1, Height2, Decimal_Places))
         Text_Scroll_Effect(Answer_Text, Text_Time)
     Again = Question(str, "(yes or no) done using the script?: ", "I don't think this is possible to mess up", Text_Time)
     if Again == "yes":

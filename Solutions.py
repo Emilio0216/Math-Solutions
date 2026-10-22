@@ -87,17 +87,6 @@ Text_Time = Setting.Text_Speed()
 Decimal_Places = Setting.Decimal_Amount()
 Default_Variable_Text = "Default text speed: " + str(Text_Time) + " \nDefault Rounding: " + str(Decimal_Places) + " decimal places \n"
 Text_Scroll_Effect(Default_Variable_Text, Text_Time)
-
-
-
-
-
-
-
-
-
-
-
 #Main script
 Repeat = True
 while(Repeat == True):
@@ -118,6 +107,14 @@ while(Repeat == True):
 
         elif Options == 2:
             Decimal_Places = Question(int, "How many decimal places do you want?: " , "Number not text dawg" ,Text_Time)
+            with open('Setting.py', 'r') as f:
+                lines = f.read().split('\n')
+                print(lines)
+                new_line = '    b = ' + str(Decimal_Places)
+                new_file = '\n'.join(lines[:5] + [new_line] + lines[6:])
+            
+            with open('Setting.py', 'w') as f:
+                f.write(new_file)
     elif Equation == 1:
         Text_Scroll_Effect("* in the answer first number will be the positive result and the second number will be the negative result.", Text_Time)
         a = Question(float, "First Number: ", "Answer invalid", Text_Time)

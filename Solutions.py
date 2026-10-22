@@ -4,12 +4,7 @@
 #Imports
 import math, time, random, sys, os, Setting
 from time import sleep
-"""
-for t in text:
-        print(t, end='')
-        sys.stdout.flush()
-        time.sleep(delay)
-"""
+
 #Helper functions
 def Question(Answer_Type, Question_Text = "I NEED TO RESET THIS TEXT", Fail_Text = "That is not a valid answer. Please try again.", Text_Time = 0.02):
     Text_Scroll_Effect(Question_Text, Text_Time, True)
@@ -40,7 +35,6 @@ def Intial_Velocity_And_Angle(Intial_X_Velocity, Intial_Y_Velocity, Decimals):
     Angle = Intial_Y_Velocity / Intial_Velocity
     Angle_Degrees = math.asin(Angle) * (180.0 / math.pi)
     return round(Intial_Velocity, Decimals), round(Angle_Degrees, Decimals)
-
 def Quadratic_Solution(a, b, c, Decimals):
     Divider = 2 * a
     Before_Root = (b**2) + (-4*(a*c))
@@ -48,22 +42,18 @@ def Quadratic_Solution(a, b, c, Decimals):
     Total_Positive = ((b * -1) + Square_Root) / Divider
     Total_Negative = ((b * -1) - Square_Root) / Divider
     return round(Total_Positive,Decimals), round(Total_Negative,Decimals)
-
 def X_And_Y_Velocity_From_Displacement_And_Time(X_Displacement, Total_Time, Decimals):
     X_Intial_Velocity = X_Displacement / Total_Time
     Y_Intial_Velocity = (Total_Time / 2) * 9.8
     return round(X_Intial_Velocity, Decimals), round(Y_Intial_Velocity, Decimals), Intial_Velocity_And_Angle(X_Intial_Velocity, Y_Intial_Velocity, Decimals)
-
 def X_And_Y_Velocity_From_Intial_Velocity_And_Angle(Intial_Velocity, Angle_Degrees, Decimals):
     Intial_X_Velocity = math.cos(math.radians(Angle_Degrees))* Intial_Velocity
     Intial_Y_Velocity = math.sin(math.radians(Angle_Degrees))* Intial_Velocity
     return round(Intial_X_Velocity, Decimals), round(Intial_Y_Velocity, Decimals)
-
 def X_From_Square_Area_And_Perimeter(Area, Perimeter, Decimals):
     Temp_Perimeter = Perimeter/-2
     X = Quadratic_Solution(1,Temp_Perimeter,Area,Decimals)
     return X
-
 def X_And_Dimensions_From_Area_And_Length_And_Width(Area, Length1, Length2, Width1, Width2, Decimals):
     #i had to relearn arrays for this and im mad 
     Temp_Area = Area * -1
@@ -74,10 +64,8 @@ def X_And_Dimensions_From_Area_And_Length_And_Width(Area, Length1, Length2, Widt
     Length_Answer = (Answers[0]*Length1) + Length2
     Width_Answer = (Answers[0] * Width1) + Width2
     return Answers, Length_Answer, Width_Answer
-
 def Dimensions_Of_A_Triangle_From_Lengths():
     print('unfinished')
-
 def X_And_Dimensions_From_Triangle_Area_And_Length_And_Height(Area, Length1, Length2, Height1, Height2, Decimals):
     Temp_Area_Tri = Area * 2
     return X_And_Dimensions_From_Area_And_Length_And_Width(Temp_Area_Tri ,Length1, Length2, Height1, Height2, Decimals)
@@ -88,8 +76,7 @@ Decimal_Places = Setting.Decimal_Amount()
 Default_Variable_Text = "Default text speed: " + str(Text_Time) + " \nDefault Rounding: " + str(Decimal_Places) + " decimal places \n"
 Text_Scroll_Effect(Default_Variable_Text, Text_Time)
 #Main script
-Repeat = True
-while(Repeat == True):
+while(True):
     Text_Scroll_Effect("0. Settings\n1. Quadratic solution \n2. For intial velocity and angle\n3. Finding x and y intial velocity off distance and time\n4. Finding x and y intial velocity off intial velocity and angle\n5. Finding Length and width of a square with Area and Perimeter\n6. X and dimensions for a square from area and length & Width\n7. X and dimensions from area length and height", Text_Time)
     Equation = Question(int, "What would you like to do?: ", "Please choose a whole number 0-7", Text_Time)
     if Equation == 0:
@@ -169,7 +156,7 @@ while(Repeat == True):
         Text_Scroll_Effect(Answer_Text, Text_Time)
     Again = Question(str, "(yes or no) done using the script?: ", "I don't think this is possible to mess up", Text_Time)
     if Again == "yes":
-        Repeat = False
+        break
 
     Clear_Terminal()
 print('something broke or you ended the script')

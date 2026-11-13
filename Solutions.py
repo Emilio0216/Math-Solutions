@@ -69,15 +69,19 @@ def Dimensions_Of_A_Triangle_From_Lengths():
 def X_And_Dimensions_From_Triangle_Area_And_Length_And_Height(Area, Length1, Length2, Height1, Height2, Decimals):
     Temp_Area_Tri = Area * 2
     return X_And_Dimensions_From_Area_And_Length_And_Width(Temp_Area_Tri ,Length1, Length2, Height1, Height2, Decimals)
+
+
+
+
 #intial varible list
 Clear_Terminal()
 Text_Time = Setting.Text_Speed()
 Decimal_Places = Setting.Decimal_Amount()
 Default_Variable_Text = "Default text speed: " + str(Text_Time) + " \nDefault Rounding: " + str(Decimal_Places) + " decimal places \n"
 Text_Scroll_Effect(Default_Variable_Text, Text_Time)
-#Main script
+#Main script I HATE EMELIO >:), From Ruben that you will never get my calc 
 while(True):
-    Text_Scroll_Effect("0. Settings\n1. Quadratic solution \n2. For intial velocity and angle\n3. Finding x and y intial velocity off distance and time\n4. Finding x and y intial velocity off intial velocity and angle\n5. Finding Length and width of a square with Area and Perimeter\n6. X and dimensions for a square from area and length & Width\n7. X and dimensions from area length and height", Text_Time)
+    Text_Scroll_Effect("0. Settings\n1. Quadratic solution \n2. For intial velocity and angle\n3. Finding x and y intial velocity off distance and time\n4. Finding x and y intial velocity off intial velocity and angle\n5. Finding Length and width of a square with Area and Perimeter\n6. X and dimensions for a square from area and length & Width\n7. X and dimensions from area length and height\n8. Total resistance from all other resistances", Text_Time)
     Equation = Question(int, "What would you like to do?: ", "Please choose a whole number 0-7", Text_Time)
     if Equation == 0:
         Options = Question(int,"1. Text Speed\n2. Decimal place rounding\n what would you like?: ", "a number please", Text_Time)
@@ -154,6 +158,19 @@ while(True):
         Height2 = Question(float, "Second number for Height?: ", "Number not str", Text_Time)
         Answer_Text = "X and Length & Height " + str(X_And_Dimensions_From_Triangle_Area_And_Length_And_Height(Area_Of_Square, Length1, Length2, Height1, Height2, Decimal_Places))
         Text_Scroll_Effect(Answer_Text, Text_Time)
+    
+    elif Equation == 8:
+        Resistance_Array = []
+        Total_Resistance = 0
+        Amount_Of_Inputs = Question(int, "How many resitances?: ", "Answer invalid", Text_Time)
+        for i in range(Amount_Of_Inputs):
+            Resitance = Question(float, "How much resitance for resistor " + str(i+1) + "?: ", "a number please", Text_Time)
+            Resistance_Array.append(Resitance)
+        for i in Resistance_Array:
+            Temp_Resitance = 1/i
+            Total_Resistance += Temp_Resitance
+        Resistance = 1/Total_Resistance
+        Text_Scroll_Effect(str(Resistance), Text_Time)
     Again = Question(str, "(yes or no) done using the script?: ", "I don't think this is possible to mess up", Text_Time)
     if Again == "yes":
         break
